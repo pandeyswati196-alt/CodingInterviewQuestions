@@ -1,0 +1,19 @@
+package Collectioncoding;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Duplicatesfromarraylist {
+
+	public static void main(String[] args) {
+		List<String> duplicate=new ArrayList<String>();
+		duplicate.add("hi");
+		duplicate.add("huh");
+		duplicate.add("hey");
+		duplicate.add("hiee");
+		duplicate.add("hi");
+		// TODO Auto-generated method stub
+
+	}
+
+}

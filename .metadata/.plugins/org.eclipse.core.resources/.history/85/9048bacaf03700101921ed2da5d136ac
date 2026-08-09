@@ -1,0 +1,15 @@
+package stringques;
+
+public class Reverse {
+
+	public static void main(String[] args) {
+	 String s1 ="swati";
+	 char ch []=s1.toCharArray();
+	 for (int i =ch.length-1;i>=0;i--) {
+		 char s2 =ch[i];
+		 System.out.print(s2);
+	 } 
+
+	}
+
+}

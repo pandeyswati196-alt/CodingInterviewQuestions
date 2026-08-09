@@ -1,0 +1,28 @@
+package Collectioncoding;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Reversearraylist {
+
+	public static void main(String[] args) {
+		List<Integer> num=new ArrayList<Integer>();
+		num.add(12);
+		num.add(85);
+		num.add(28);
+		num.add(98);
+		num.add(1);
+		System.out.println(num);
+		Collections.reverse(num);
+		System.out.println(num);
+		for(int i=num.size();i>=0;i--) {
+			System.out.println(num.get(i));
+		}
+		
+
+
+
+	}
+
+}

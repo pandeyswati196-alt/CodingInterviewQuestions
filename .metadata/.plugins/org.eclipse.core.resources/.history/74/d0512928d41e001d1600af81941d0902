@@ -1,0 +1,23 @@
+package Collectioncoding;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+
+public class Duplicatesfromarraylist {
+
+	public static void main(String[] args) {
+		List<String> duplicate=new ArrayList<String>();
+		duplicate.add("hi");
+		duplicate.add("huh");
+		duplicate.add("hey");
+		duplicate.add("hiee");
+		duplicate.add("hi");
+		
+		LinkedHashSet<String> copy=new LinkedHashSet<String>(duplicate);
+		copy.addAll(duplicate);
+		System.out.println(copy);
+
+	}
+
+}

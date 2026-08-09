@@ -1,0 +1,96 @@
+package streams;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class Streams {
+	
+	////given a String, print the first letter of each word using stream api
+	
+	public static String printFirstLetter(String s) {
+		return Arrays.stream(s.split(" ")).filter(word->!word.isEmpty()).map(word->String.valueOf(word.charAt(0))).collect(Collectors.joining());
+	}
+	
+
+	
+	public static Map<Character, Long> frequencyOfEachCharacter(String s){
+	    Map<Character, Long> freq = s.replaceAll("\\s+","").toLowerCase().chars().mapToObj(c->(char)c).collect(
+	        Collectors.groupingBy(Function.identity(),LinkedHashMap :: new, Collectors.counting()));
+	        return freq;
+	}
+	
+	public static Map<Character,Long> duplicatecharacterwithcount(String s){
+		Map<Character, Long> newmap= new LinkedHashMap<>();
+		Map<Character, Long> map=s.replaceAll("\\s+", "").toLowerCase().chars().mapToObj(c->(char)c).collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new,Collectors.counting()));
+		newmap=map.entrySet().stream().filter(e->e.getValue()>1).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		return newmap;
+		
+	}
+	
+	public static boolean isAnagram(String s1, String s2){
+		Map<Character,Long> map1= s1.replaceAll("\\s+", "").chars().mapToObj(c->(char)c).collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new ,Collectors.counting()));
+		Map<Character,Long> map2= s1.replaceAll("\\s+", "").chars().mapToObj(c->(char)c).collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new ,Collectors.counting()));
+		return map1.equals(map2);
+	}
+	
+	public static String removeDuplicate(String s) {
+		String s1= s.replaceAll("\\s+", "").toLowerCase().chars().mapToObj(c->(char)c).distinct().map(String::valueOf).collect(Collectors.joining());
+		return s1;
+	}
+	
+	public static Character mostFrequencyChar(String s) {
+		return s.replaceAll("\\s+", "").toLowerCase().chars().mapToObj(c -> (char) c)
+				.collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+				.entrySet().stream().sorted((e1, e2) -> Long.compare(e2.getValue(), e1.getValue())) // descending
+	            .skip(1) // skip most frequent
+	            .map(Map.Entry::getKey)
+	            .findFirst()
+	            .orElse(null);
+	}
+	
+	public static boolean isPalindrome(String s) {
+		return s.replaceAll("\\s+", "").toLowerCase().equals(new StringBuilder(s).reverse().toString());
+	}
+	
+	public static String reverseEachWord(String s) {
+		String s1=Arrays.stream(s.split("")).map(word->new StringBuilder(word).reverse().toString()).collect(Collectors.joining());
+		return s1;
+	}
+	
+	public static StringBuilder runlengthEncoding(String s){
+	    StringBuilder result = new StringBuilder();
+	    int count =1;
+	 for(int i=1;i<=s.length();i++){
+	     if(i<s.length() && s.charAt(i) == s.charAt(i-1)){
+	         count++;
+	     }else{
+	         result.append(s.charAt(i-1)).append(count);
+	         count =1;
+	     }
+	 }   
+	 return result;
+	}
+	
+	
+
+
+	public static void main(String[] args) {
+		Map<Character, Long> newmap= new LinkedHashMap<>();
+		String s = "My Name is Arya";
+		String s1=printFirstLetter(s);
+		
+		Map<Character,Long> freqmap= s.replaceAll("\\s+","").toLowerCase().chars().mapToObj(c->(char) c).collect(Collectors.groupingBy(Function.identity(),LinkedHashMap :: new, Collectors.counting()));
+		newmap=freqmap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		System.out.println(newmap);
+		Map<Character, Long> duplicateCharacter=duplicatecharacterwithcount(s);
+		System.out.println(duplicateCharacter);
+		
+		
+
+
+	}
+
+}

@@ -1,0 +1,51 @@
+package streams;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class Streams {
+	
+	////given a String, print the first letter of each word using stream api
+	
+	public static String printFirstLetter(String s) {
+		return Arrays.stream(s.split(" ")).filter(word->!word.isEmpty()).map(word->String.valueOf(word.charAt(0))).collect(Collectors.joining());
+	}
+	
+
+	
+	public static Map<Character, Long> frequencyOfEachCharacter(String s){
+	    Map<Character, Long> freq = s.replaceAll("\\s+","").toLowerCase().chars().mapToObj(c->(char)c).collect(
+	        Collectors.groupingBy(Function.identity(),LinkedHashMap :: new, Collectors.counting()));
+	        return freq;
+	}
+	
+	public static Map<Character,Long> duplicatecharacterwithcount(String s){
+		Map<Character, Long> newmap= new LinkedHashMap<>();
+		Map<Character, Long> map=s.replaceAll("\\s+", "").toLowerCase().chars().mapToObj(c->(char)c).collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new,Collectors.counting()));
+		newmap=map.entrySet().stream().filter(e->e.getValue()>1).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		return newmap;
+		
+	}
+	
+
+
+	public static void main(String[] args) {
+		Map<Character, Long> newmap= new LinkedHashMap<>();
+		String s = "My Name is Arya";
+		String s1=printFirstLetter(s);
+		
+		Map<Character,Long> freqmap= s.replaceAll("\\s+","").toLowerCase().chars().mapToObj(c->(char) c).collect(Collectors.groupingBy(Function.identity(),LinkedHashMap :: new, Collectors.counting()));
+		newmap=freqmap.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		System.out.println(newmap);
+		Map<Character, Long> duplicateCharacter=duplicatecharacterwithcount(s);
+		System.out.println(duplicateCharacter);
+		
+		
+
+
+	}
+
+}
